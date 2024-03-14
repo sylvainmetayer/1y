@@ -1,3 +1,3 @@
 ---
-url: https://github.com/sylvainmetayer/talk-asdf/
+url: https://sylvainmetayer.github.io/talk-asdf/devfest-nantes-2023/
 ---

@@ -1,4 +1,4 @@
 ---
-url: https://sylvainmetayer.github.io/talk-automatisez-installation-de-votre-pc-snowcamp-2024/
+url: https://workstation-automation.talks.sylvain.dev/snowcamp-2024
 ---
 

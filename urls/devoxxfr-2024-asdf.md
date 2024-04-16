@@ -1,3 +1,3 @@
 ---
-url: https://asdf.talks.sylvain.dev/devoxx2024
+url: https://asdf.talks.sylvain.dev/devoxxfr2024
 ---

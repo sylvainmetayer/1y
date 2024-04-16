@@ -1,3 +1,3 @@
 ---
-url: https://sops.talks.sylvain.dev/devoxx2024
+url: https://sops.talks.sylvain.dev/devoxxfr2024
 ---

@@ -1,4 +1,4 @@
 ---
-url: https://github.com/sylvainmetayer/talk-automatisez-installation-de-votre-pc/
+url: https://workstation-automation.talks.sylvain.dev/sunnytech-2023/
 ---
 

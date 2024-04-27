@@ -1,3 +1,3 @@
 ---
-url: https://sylvainmetayer.github.io/talk-automatisez-installation-de-votre-pc-bdxio-2023/
+url: https://workstation-automation.talks.sylvain.dev/bdxio-2023/
 ---

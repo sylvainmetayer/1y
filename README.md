@@ -26,35 +26,26 @@ So for this example, when you go to [https://\<your-short-domain\>/**nho**](http
 Redirection rules are generated in 4 formats to ease usage on different environments:
 - Apache HTTP server with [Alias module](https://httpd.apache.org/docs/current/en/mod/mod_alias.html) in a `.htaccess` file
 - Apache HTTP server with [Rewrite module](https://httpd.apache.org/docs/current/en/mod/mod_rewrite.html) (less efficient) in the same `.htaccess` file
-- [Netlify](https://netlify.com/) hosting with [redirects](https://docs.netlify.com/routing/redirects/) in a `_redirects` file
+- [Cloudflare Pages](https://pages.cloudflare.com/) hosting with [redirects](https://developers.cloudflare.com/pages/configuration/redirects/) in a `_redirects` file (also understood by Netlify), with and without trailing slash
 - HTML pages with both [HTML redirect](https://css-tricks.com/redirect-web-page/#article-header-id-1) (`<meta>` tag) and [JavaScript Redirect](https://css-tricks.com/redirect-web-page/#article-header-id-2). This is only meant as a last resort, only there if previous formats don't work. Your HTTP server needs to be able to respond to [https://\<your-short-domain\>/**nho**](https://<your-short-domain>/nho) with this actual ressource: [https://\<your-short-domain\>/**nho/index.html**](https://<your-short-domain>/nho/index.html)
 
 You don't have to deal with any settings to chose which one to use, all 4 formats are generated at once.
 
-## What do I have to do to use it?
+## Deployment
 
-This repository is intended to be used as a template for creating your own repository.
+This instance serves [r.sylvain.dev](https://r.sylvain.dev) from **Cloudflare Pages**, like the other static sites:
 
-### The easiest: use Netlify Deploy Button
+- each push to `master` builds (`npm run build`) and deploys `_site/` to production, every other branch gets a preview deployment;
+- the Pages project, its custom domain and the DNS record are managed with OpenTofu in [`sylvainmetayer/homelab`](https://github.com/sylvainmetayer/homelab) (`tofu/1y`);
+- `wrangler.toml` declares the build output directory and the compatibility date.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/nhoizey/1y&stack=cms)
+## Usage
 
-Clicking the button above will:
-- create a new repository in your own GitHub account with **1y** code
-- and deploy a copy of this new repository to your Netlify account (you can create an account during this process if you don't have one).
+With [mise](https://mise.jdx.dev/) (Node.js version from `mise.toml` / `.node-version`):
 
-Each time you push changes to your Github repository (or add files directly with Github's Web interface), Netlify will build the new redirection files.
-
-### If you want to use another hosting service: use the Github template
-
-1. Click the <kbd>Use this template</kbd> green button in Github interface to create your own **1y** repository in your Github account
-1. Clone or download the new repository to your local computer
-1. (optional) If you don't have `npm` yet, [install npm](https://www.npmjs.com/get-npm)
-1. Install **1y** dependencies with `npm install`
 1. Add new short URLs as Markdown files in the `urls/` folder
-1. Generate the redirection files with this command: `npm run build`
-
-Generated files to deploy are in the `_site` folder.
+1. `mise run build` generates the redirection files in `_site/`
+1. `mise run preview` serves `_site/` with the Cloudflare Pages emulator on <http://localhost:8788>, `_redirects` included (`mise run dev` runs Eleventy's dev server, which ignores `_redirects`)
 
 ## Contribution
 

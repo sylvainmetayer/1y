@@ -1,3 +1,9 @@
 name = "1y"
 pages_build_output_dir = "_site"
 compatibility_date = "2026-09-01"
+
+# Variables du build Pages : avec ce fichier, celles du dashboard sont ignorées.
+# Pages ne lit pas mise.toml : garder la même version que [tools] node (vérifié
+# par .github/workflows/node-version.yml et par tofu/1y dans homelab).
+[vars]
+NODE_VERSION = "26"

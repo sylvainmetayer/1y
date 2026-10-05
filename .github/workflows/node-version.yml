@@ -1,0 +1,29 @@
+name: Node version
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  node-version:
+    name: mise.toml et wrangler.toml alignés
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Compare les versions de Node
+        run: |
+          mise=$(sed -nE 's/^node[[:space:]]*=[[:space:]]*"([^"]+)".*/\1/p' mise.toml | head -1)
+          wrangler=$(sed -nE 's/^NODE_VERSION[[:space:]]*=[[:space:]]*"([^"]+)".*/\1/p' wrangler.toml | head -1)
+          echo "mise.toml : ${mise:-introuvable} / wrangler.toml : ${wrangler:-introuvable}"
+          if [ -z "$mise" ] || [ "$mise" != "$wrangler" ]; then
+            echo "::error file=wrangler.toml::NODE_VERSION (${wrangler:-introuvable}) doit être égal à [tools] node de mise.toml (${mise:-introuvable})"
+            exit 1
+          fi

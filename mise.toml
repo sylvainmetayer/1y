@@ -1,0 +1,27 @@
+[tools]
+node = "24"
+
+[tasks.install]
+description = "Installe les dépendances npm"
+run = "npm install"
+sources = ["package.json", "package-lock.json"]
+outputs = ["node_modules/.package-lock.json"]
+
+[tasks.dev]
+description = "Serveur de dev avec rechargement (sans les redirections _redirects)"
+depends = ["install"]
+run = "npx eleventy --serve"
+
+[tasks.build]
+description = "Génère le site dans _site/"
+depends = ["install", "clean"]
+run = "npm run build"
+
+[tasks.preview]
+description = "Émulateur Cloudflare Pages sur :8788 (avec _redirects)"
+depends = ["build"]
+run = "npx -y wrangler@4 pages dev _site --port 8788"
+
+[tasks.clean]
+description = "Supprime _site/"
+run = "rm -rf _site"

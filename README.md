@@ -41,7 +41,7 @@ This instance serves [r.sylvain.dev](https://r.sylvain.dev) from **Cloudflare Pa
 
 ## Usage
 
-With [mise](https://mise.jdx.dev/) (Node.js version from `mise.toml`):
+With [mise](https://mise.jdx.dev/) (Node.js version from `mise.toml`, mirrored in `wrangler.toml` `[vars]` for the Pages build):
 
 1. Add new short URLs as Markdown files in the `urls/` folder
 1. `mise run build` generates the redirection files in `_site/`

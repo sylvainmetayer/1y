@@ -3,10 +3,25 @@
   "extends": [
     "config:recommended"
   ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "NODE_VERSION du build Pages, aligné sur mise.toml",
+      "managerFilePatterns": ["/^wrangler\\.toml$/"],
+      "matchStrings": ["NODE_VERSION = \"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version"
+    }
+  ],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest", "lockFileMaintenance"],
       "automerge": true
+    },
+    {
+      "description": "mise.toml et wrangler.toml dans la même PR (vérifié par node-version.yml)",
+      "matchDepNames": ["node"],
+      "groupName": "Node.js"
     }
   ]
 }

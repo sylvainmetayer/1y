@@ -11,6 +11,14 @@
       "matchStrings": ["NODE_VERSION = \"(?<currentValue>[^\"]+)\""],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
+    },
+    {
+      "customType": "regex",
+      "description": "Extension gh-actions-lock épinglée dans verify-lockfile.yml (--pin vX.Y.Z)",
+      "managerFilePatterns": ["/^\\.github/workflows/verify-lockfile\\.yml$/"],
+      "matchStrings": ["--pin (?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "github/gh-actions-lock",
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
@@ -22,6 +30,11 @@
       "description": "mise.toml et wrangler.toml dans la même PR (vérifié par node-version.yml)",
       "matchDepNames": ["node"],
       "groupName": "Node.js"
+    },
+    {
+      "description": "gh-actions-lock : pas d'automerge (0.x, format du verrou encore mouvant)",
+      "matchDepNames": ["github/gh-actions-lock"],
+      "automerge": false
     }
   ]
 }
